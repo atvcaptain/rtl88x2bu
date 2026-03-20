@@ -16,11 +16,6 @@ ccflags-y += -Wno-address
 ccflags-y += -Wno-missing-prototypes
 ccflags-y += -Wno-missing-declarations
 
-GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
-ifeq ($(GCC_VER_49),1)
-ccflags-y += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
-endif
-
 ccflags-y += -I$(src)/include
 
 ldflags-y += --strip-debug
@@ -53,7 +48,7 @@ CONFIG_GSPI_HCI = n
 ########################## Features ###########################
 CONFIG_NET_NS=y
 CONFIG_MP_INCLUDED = y
-CONFIG_POWER_SAVING = y
+CONFIG_POWER_SAVING = n
 CONFIG_IPS_MODE = default
 CONFIG_LPS_MODE = default
 CONFIG_USB_AUTOSUSPEND = n
@@ -123,7 +118,7 @@ CONFIG_RTW_SDIO_PM_KEEP_POWER = y
 ###################### MP HW TX MODE FOR VHT #######################
 CONFIG_MP_VHT_HW_TX_MODE = n
 ###################### Platform Related #######################
-CONFIG_PLATFORM_I386_PC = y
+CONFIG_PLATFORM_I386_PC = n
 CONFIG_PLATFORM_ANDROID_X86 = n
 CONFIG_PLATFORM_ANDROID_INTEL_X86 = n
 CONFIG_PLATFORM_JB_X86 = n
@@ -181,7 +176,7 @@ CONFIG_PLATFORM_RTK129X = n
 CONFIG_PLATFORM_RTK390X = n
 CONFIG_PLATFORM_NOVATEK_NT72668 = n
 CONFIG_PLATFORM_HISILICON = n
-CONFIG_PLATFORM_HISILICON_HI3798 = n
+CONFIG_PLATFORM_HISILICON_HI3798 = y
 CONFIG_PLATFORM_NV_TK1 = n
 CONFIG_PLATFORM_NV_TK1_UBUNTU = n
 CONFIG_PLATFORM_RTL8197D = n
@@ -828,7 +823,7 @@ ifeq ($(CONFIG_USB_HCI), y)
 ifeq ($(CONFIG_BT_COEXIST), n)
 MODULE_NAME = 8812bu
 else
-MODULE_NAME = 88x2bu
+MODULE_NAME = 8822bu
 endif
 endif
 ifeq ($(CONFIG_PCI_HCI), y)
